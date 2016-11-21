@@ -9,5 +9,6 @@ return [
         'number' => [
             'default' => 10,
         ]
-    ]
+    ],
+    'time-format' => 'H:i:s',
 ];

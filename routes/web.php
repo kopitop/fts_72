@@ -17,7 +17,12 @@ Route::get('/', function () {
 
 Route::get('/home', 'HomeController@index');
 
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+//Admin features
+Route::group(['middleware' => 'admin', 'prefix' => 'admin', 'namespace' => 'Admin'], function () {
+    Route::get('/', 'HomeController@index'); 
+    
+    Route::resource('subjects', 'SubjectsController');
+});
+
