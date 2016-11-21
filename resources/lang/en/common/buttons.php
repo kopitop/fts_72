@@ -10,4 +10,6 @@ return [
     'user-profile' => 'User Profile',
     'reset-password' => 'Reset Password',
     'send-link' => 'Send Link',
+    'edit' => 'Edit',
+    'delete' => 'Delete',
 ];
