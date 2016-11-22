@@ -68,4 +68,17 @@ abstract class BaseRepository
     {  
         return $this->model->pluck($column, $key);
     }
+
+    /**
+     * Find data by id
+     *
+     * @param       $id
+     * @param array $columns
+     *
+     * @return mixed
+     */
+    public function find($id, $columns = ['*'])
+    {
+        return $this->model->findOrFail($id, $columns);
+    }
 }

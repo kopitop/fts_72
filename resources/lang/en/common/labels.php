@@ -7,4 +7,8 @@ return [
     'name' => 'Name',
     'id' => 'ID',
     'action' => 'Action',
+    'duration' => 'Duration',
+    'quantity' => 'Quantity',
+    'created-at' => 'Created At',
+    'updated-at' => 'Updated At',
 ];
