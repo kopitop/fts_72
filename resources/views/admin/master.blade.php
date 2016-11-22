@@ -7,6 +7,12 @@
             @include('admin.includes.sidebar')
         </div>
         <div class="col-md-9">
+            @if (session()->has('message'))
+                <div class="alert alert-info">
+                    <p>{{ session('message') }}</p>
+                </div>
+            @endif
+
             @if (count($errors) > 0)
                 <div class="alert alert-danger">
                     <ul>

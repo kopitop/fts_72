@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Repositories\Contracts\SubjectRepositoryInterface as SubjectRepository;
+use App\Http\Requests\StoreSubject;
 
 class SubjectsController extends BaseController
 {
@@ -37,7 +38,7 @@ class SubjectsController extends BaseController
      */
     public function create()
     {
-        //
+        return view('admin.subject.create', $this->viewData);
     }
 
     /**
@@ -46,9 +47,17 @@ class SubjectsController extends BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(StoreSubject $request)
+    {   
+        try {
+            $input = $request->only('name', 'duration', 'number_of_question');
+            $this->subject->create($input);
+        } catch (Exception $e) {
+
+            return back()->withError(trans('messages.create.error'));
+        }
+
+        return redirect()->action('Admin\SubjectsController@index')->with('message', trans('messages.success.create'));
     }
 
     /**
