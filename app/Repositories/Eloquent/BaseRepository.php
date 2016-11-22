@@ -84,4 +84,17 @@ abstract class BaseRepository implements RepositoryInterface
 
         return $this->model->paginate($limit, $columns);
     }
+    
+    /**   
+     * Find data by id
+     *
+     * @param       $id
+     * @param array $columns
+     *
+     * @return mixed
+     */
+    public function find($id, $columns = ['*'])
+    {
+        return $this->model->findOrFail($id, $columns);
+    }
 }

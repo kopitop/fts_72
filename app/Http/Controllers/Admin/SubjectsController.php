@@ -59,7 +59,9 @@ class SubjectsController extends BaseController
      */
     public function show($id)
     {
-        //
+        $this->viewData['subject'] = $this->subjectRepository->find($id);
+        
+        return view('admin.subject.detail', $this->viewData);
     }
 
     /**

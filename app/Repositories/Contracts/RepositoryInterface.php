@@ -34,4 +34,14 @@ interface RepositoryInterface
      */
     public function paginate($limit = null, $columns = ['*']);
 
+     /**   
+     * Find data by id
+     *
+     * @param       $id
+     * @param array $columns
+     *
+     * @return mixed
+     */
+    public function find($id, $columns = ['*']);
+
 }
