@@ -16,7 +16,7 @@
                 @foreach ($subjects as $subject)
                 <tr>
                     <td>{{ $subject->id }}</td>
-                    <td>{{ $subject->name }}</td>
+                    <td><a href="{{ action('Admin\SubjectsController@show', ['id' => $subject->id]) }}">{{ $subject->name }}</a></td>
                     <td>{{ gmdate(config('subject.time-format'), $subject->duration) }}</td>
                     <td>{{ $subject->number_of_question }}</td>
                     <td>
