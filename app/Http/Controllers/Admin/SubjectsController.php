@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Repositories\Contracts\SubjectRepositoryInterface as SubjectRepository;
 use App\Http\Requests\StoreSubject;
+use App\Http\Requests\UpdateSubject;
 
 class SubjectsController extends BaseController
 {
@@ -81,7 +82,9 @@ class SubjectsController extends BaseController
      */
     public function edit($id)
     {
-        //
+        $this->viewData['subject'] = $this->subject->find($id);
+
+        return view('admin.subject.edit', $this->viewData);
     }
 
     /**
@@ -91,9 +94,25 @@ class SubjectsController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateSubject $request, $id)
     {
-        //
+        try {
+            $input = $request->only('name', 'duration', 'number_question');
+            foreach ($input as $key => $value) {
+                if ($value == '') {
+                    unset($input[$key]);
+                }
+            }
+
+            $this->subject->update($input, $id);
+        } catch (Exception $e) {
+            Log::debug($e);
+
+            return back()->withError(trans('messages.failed.update'));
+        }
+
+        return redirect()->action('Admin\SubjectsController@show', ['id' => $id])
+            ->with('message', trans('messages.success.update'));
     }
 
     /**

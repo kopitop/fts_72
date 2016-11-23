@@ -17,13 +17,19 @@
                 @foreach ($subjects as $subject)
                 <tr>
                     <td>{{ $subject->id }}</td>
-                    <td><a href="{{ action('Admin\SubjectsController@show', ['id' => $subject->id]) }}">{{ $subject->name }}</a></td>
+                    <td>
+                        <a href="{{ action('Admin\SubjectsController@show', ['id' => $subject->id]) }}">
+                            {{ $subject->name }}
+                        </a>
+                    </td>
                     <td>{{ gmdate(config('subject.time-format'), $subject->duration) }}</td>
                     <td>{{ $subject->number_of_question }}</td>
                     <td>
                         <div class="btn-group btn-group-sm">
-                            <a class="btn btn-default">{{ trans('common/buttons.edit') }}</a>
-                            <a class="btn btn-danger">{{ trans('common/buttons.delete') }}</a>
+                            <a href="{{ action('Admin\SubjectsController@edit', ['id' => $subject->id]) }}" class="btn btn-default">
+                                {{ trans('common/buttons.edit') }}
+                            </a>
+                            <a href="#" class="btn btn-danger">{{ trans('common/buttons.delete') }}</a>
                           </div>
                     </td>
                 </tr>
