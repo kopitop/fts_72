@@ -95,4 +95,23 @@ abstract class BaseRepository
     {
         return $this->model->create($input);
     }
+
+    /**
+     * Update a entity in repository by id
+     *
+     * @throws Exception
+     *
+     * @param array $input
+     * @param       $id
+     *
+     * @return void
+     */
+    public function update(array $input, $id)
+    {
+        $model = $this->model->findOrFail($id);
+        $model->fill($input);
+        $model->save();
+
+        return;
+    }
 }

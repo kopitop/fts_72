@@ -84,6 +84,9 @@
     </div>
 
     <!-- Scripts -->
+    <script>
+        var confirmation = "{{ trans('common/dialogs.confirmation') }}";
+    </script>
     <script src="/js/app.js"></script>
 </body>
 </html>

@@ -50,5 +50,10 @@ $(document).ready(function () {
         $('.status').on('click', function () {
             $(this).hide(400);
         });
-    }); 
+    });
+
+    //Prompt confirm dialog
+    $('.confirm').on('click', function () {
+        return confirm(confirmation);
+    })
 })
