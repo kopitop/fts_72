@@ -5,6 +5,9 @@ namespace App\Repositories\Eloquent;
 use App\Repositories\Contracts\RepositoryInterface;
 use Illuminate\Container\Container as App;
 use Illuminate\Database\Eloquent\Model;
+use Log;
+use DB;
+use Exception;
 
 abstract class BaseRepository implements RepositoryInterface
 {
@@ -109,11 +112,14 @@ abstract class BaseRepository implements RepositoryInterface
     {
         DB::beginTransaction();
         try {
-            $this->model->destroy($id);
+            if (!$this->model->destroy($id)) {
+                throw new Exception(trans('common/messages.errors.delete'));
+            }
 
             DB::commit();
         } catch (Exception $e) {
-            DB::rollBack();
+            DB::rollback();
+            Log::debug($e);
             
             throw $e;
         }

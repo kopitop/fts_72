@@ -7,6 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">{{ trans('auth.register') }}</div>
                 <div class="panel-body">
+                    @include('layouts.includes.messages')
                     {!! Form::open(['route' => 'register', 'class' => 'form-horizontal']) !!}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">

@@ -95,6 +95,15 @@ class SubjectsController extends BaseController
      */
     public function destroy($id)
     {
-        //
+        try {
+             $this->subjectRepository->delete($id);
+        } catch (\Exception $e) {
+
+            return redirect()->action('Admin\SubjectsController@index')
+                ->withErrors($e->getMessage());
+        }
+        
+        return redirect()->action('Admin\SubjectsController@index')
+                    ->with('status', trans('common/messages.success.delete'));
     }
 }

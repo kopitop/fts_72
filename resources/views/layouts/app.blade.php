@@ -57,7 +57,9 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
-                                    {!! Gate::allows('access-admin') ? '<li><a href="' . action('Admin\HomeController@index') . '"><strong>' . trans('common/buttons.admin-cp') . '</strong></a></li>' : '' !!}
+                                    {!! Gate::allows('access-admin') ? 
+                                        "<li>" . link_to_action('Admin\HomeController@index', trans('common/buttons.admin-cp') , null, null) . "</li>" : ""; 
+                                    !!}
                                     <li><a href="#">{{ trans('common/buttons.user-profile') }}</a></li>
                                     <li>
                                         <a href="{{ url('/logout') }}"
@@ -77,8 +79,6 @@
                 </div>
             </div>
         </nav>
-
-        @include('layouts.includes.messages')
 
         @yield('content')
     </div>

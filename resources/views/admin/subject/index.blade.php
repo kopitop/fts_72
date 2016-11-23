@@ -22,8 +22,19 @@
                     <td>{{ $subject->number_of_question }}</td>
                     <td>
                         <div class="btn-group btn-group-sm">
-                            <a class="btn btn-default">{{ trans('common/buttons.edit') }}</a>
-                            <a class="btn btn-danger">{{ trans('common/buttons.delete') }}</a>
+                            {!! Form::open([
+                                'action' => ['Admin\SubjectsController@destroy', $subject->id],
+                                'method' =>  'DELETE'
+                            ], [
+                                'class' => 'btn-group btn-group-sm'
+                            ]) !!}
+                                <a class="btn btn-default">
+                                    {{ trans('common/buttons.edit') }}
+                                </a>
+                                {!! Form::submit(trans('common/buttons.delete'), [
+                                    'class' => 'btn btn-danger'
+                                ])!!}
+                            {!! Form::close() !!}
                           </div>
                     </td>
                 </tr>
