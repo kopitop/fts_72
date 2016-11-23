@@ -18,12 +18,12 @@
         <a href="#"><strong>{{ trans('admin/question.question') }}</strong></a>
         <ul class="nav nav-pills nav-stacked fa-ul">
             <li class="{!! set_active(['admin/questions/create']) !!}">
-                <a href="#">
+                <a href="{!! action('Admin\QuestionsController@create') !!}">
                     <i class="fa-li fa fa-caret-right"></i>{{ trans('common/buttons.create') }}
                 </a>
             </li>
             <li class="{!! set_active(['admin/questions']) !!}">
-                <a href="#">
+                <a href="{!! action('Admin\QuestionsController@index') !!}">
                     <i class="fa-li fa fa-caret-right"></i>{{ trans('common/buttons.list') }}
                 </a>
             </li>

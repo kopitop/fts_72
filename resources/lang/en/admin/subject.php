@@ -4,5 +4,6 @@ return [
     'subject' => 'Subject',
     'title' => 'Subjects Management',
     'duration' => 'Duration',
-    'quantity' => 'Quantity of questions'
+    'quantity' => 'Quantity of questions',
+    'id' => 'Subject ID',
 ];
