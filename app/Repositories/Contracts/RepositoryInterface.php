@@ -44,4 +44,12 @@ interface RepositoryInterface
      */
     public function find($id, $columns = ['*']);
 
+    /**
+     * Delete a entity in repository by id
+     *
+     * @param $id
+     *
+     * @return int
+     */
+    public function delete($id);
 }

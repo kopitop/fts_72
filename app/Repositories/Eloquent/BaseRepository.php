@@ -97,4 +97,25 @@ abstract class BaseRepository implements RepositoryInterface
     {
         return $this->model->findOrFail($id, $columns);
     }
+
+    /**
+     * Delete a entity in repository by id
+     *
+     * @param $id
+     *
+     * @return int
+     */
+    public function delete($id)
+    {
+        DB::beginTransaction();
+        try {
+            $this->model->destroy($id);
+
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollBack();
+            
+            throw $e;
+        }
+    }
 }
