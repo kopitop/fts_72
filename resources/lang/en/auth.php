@@ -26,5 +26,6 @@ return [
     'change-password' => [
         'success' => 'Your new password has been updated!',
     ],
+    'unauthenticated' => 'Please login if you want to continue.',
 
 ];
