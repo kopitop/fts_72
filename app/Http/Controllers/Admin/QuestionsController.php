@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Repositories\Contracts\QuestionRepositoryInterface as QuestionRepository;
+use App\Repositories\Contracts\SubjectRepositoryInterface as SubjectRepository;
+use App\Http\Requests\StoreQuestion;
+
 
 class QuestionsController extends BaseController
 {
@@ -12,9 +15,13 @@ class QuestionsController extends BaseController
      */
     private $questionRepository;
  
-    public function __construct(QuestionRepository $questionRepository) {
+    public function __construct(
+        QuestionRepository $questionRepository,
+        SubjectRepository $subjectRepository
+    ) {
  
         $this->questionRepository = $questionRepository;
+        $this->subjectRepository = $subjectRepository;
         $this->viewData['title'] = trans('admin/question.title');
     }
 
@@ -38,7 +45,10 @@ class QuestionsController extends BaseController
      */
     public function create()
     {
-        //
+        $this->viewData['subjectsList'] = $this->subjectRepository
+            ->lists('name', 'id');
+
+        return view('admin.question.create', $this->viewData);
     }
 
     /**
@@ -47,9 +57,9 @@ class QuestionsController extends BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreQuestion $request)
     {
-        //
+        dd($request->input());
     }
 
     /**

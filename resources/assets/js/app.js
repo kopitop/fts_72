@@ -55,5 +55,74 @@ $(document).ready(function () {
     //Prompt confirm dialog
     $('.confirm').on('click', function () {
         return confirm(confirmation);
+    });
+
+    //Add answer for question
+    $('#add-answer').on('click', function (e) {
+        e.preventDefault();
+
+        add_fields('#answer-section', '\
+                <div class="form-group">\
+                    <label class="col-sm-2 control-label">' + answer + '</label>\
+                    <div class="col-sm-6">\
+                        <input name=\'answer[index][content]\' type="text" class="form-control" placeholder="' + content + '">\
+                    </div>\
+                    <div class="checkbox-remove">\
+                        <div class="col-sm-2">\
+                            <div class="checkbox">\
+                                <label>\
+                                    <input type="hidden" name=\'answer[index][is_correct]\' value="0">\
+                                    <input name=\'answer[index][is_correct]\' class="is_correct" type="checkbox" value=1 >\
+                                    ' + is_correct + '\
+                                </label>\
+                            </div>\
+                        </div>\
+                        <div class="col-sm-2">\
+                            <button class="remove-answer btn btn-default">\
+                                ' + remove + '\
+                            </button>\
+                        </div>\
+                    </div>\
+                </div>\
+            ');
+    });
+
+    $('#question-type').on('change', function (e) {
+        if ($(this).val() == text) {
+            $(".remove-answer").trigger("click");
+            $('#add-answer').trigger("click");
+            $('.is_correct').prop('checked', true);
+            $('#add-answer').hide();
+            $(".checkbox-remove").hide();
+        } else {
+            $(".is_correct").prop("checked", false);
+            $('#add-answer').show();
+            $(".checkbox-remove").show();
+
+            if ($(this).val() == singlechoice) {
+                $(".is_correct:first").prop("checked", true);
+            }
+        }
+    });
+
+    function add_fields(link, content) {
+        var randomIndex = new Date().getTime();
+
+        $(link).append(content.replace(/index/g, randomIndex));
+    }
+
+    $(document).on('click', '.remove-answer', function (e) {
+        e.preventDefault();
+        remove_fields(this);
     })
+
+    function remove_fields(link) {
+        $(link).closest(".form-group").remove();
+    }
+
+    $(document).on("change",".is_correct", function(){
+    if ($("#question-type").val() == singlechoice){
+            $(".is_correct").not(this).prop('checked', false);
+        }
+    });
 })
