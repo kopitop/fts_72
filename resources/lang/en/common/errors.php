@@ -6,4 +6,5 @@ return [
     'exceptions' => [
         'not-instance' => 'Class :Model must be an instance of Illuminate\\Database\\Eloquent\\Model',
     ],
+    'not-empty' => 'You must empty it before do action',
 ];

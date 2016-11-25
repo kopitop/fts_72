@@ -14,4 +14,17 @@ interface QuestionRepositoryInterface extends RepositoryInterface
      * @return mixed
      */
     public function storeQuestion(array $input);
+
+    /**
+     * Update a question in repository
+     *
+     * @throws Exception
+     *
+     * @param array $input
+     *
+     * @param int $id
+     *
+     * @return mixed
+     */
+    public function updateQuestion(array $input, $id);
 }
