@@ -11,4 +11,8 @@ return [
     'quantity' => 'Quantity',
     'created-at' => 'Created At',
     'updated-at' => 'Updated At',
+    'content' => 'Content',
+    'type' => 'Type',
+    'answer' => 'Answer',
+    'subject' => 'Subject',
 ];

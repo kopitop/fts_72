@@ -12,4 +12,6 @@ return [
     'send-link' => 'Send Link',
     'edit' => 'Edit',
     'delete' => 'Delete',
+    'add-answer' => 'Add Answer',
+    'remove-answer' => 'Remove',
 ];

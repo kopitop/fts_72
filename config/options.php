@@ -11,5 +11,10 @@ return [
         1 => 10,
         2 => 20,
         3 => 30,
-    ]
+    ],
+    'question-type' =>  [
+        'singlechoice' => 1,
+        'multiplechoice' => 2,
+        'text' => 3,
+    ],
 ];

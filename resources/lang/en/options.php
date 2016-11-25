@@ -11,6 +11,11 @@ return [
         10 => '10 questions',
         20 => '20 questions',
         30 => '30 questions',
+    ],
+    'question-type' => [
+        1 => 'Singlechoice',
+        2 => 'Multiplechoice',
+        3 => 'Text',
     ]
 
 ];
