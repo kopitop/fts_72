@@ -90,4 +90,15 @@ class QuestionRepository extends BaseRepository implements QuestionRepositoryInt
 
         return $this;
     }
+
+    public function delete($id)
+    {
+        $question =  $this->model->findOrFail($id);
+
+        if (count($question->results)) {
+            return false;
+        }
+
+        return $this->model->destroy($id);
+    }
 }

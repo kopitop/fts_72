@@ -143,6 +143,17 @@ class QuestionsController extends BaseController
      */
     public function destroy($id)
     {
-        //
+        try {
+            if ($this->questionRepository->delete($id)) {
+                
+                return redirect()->action('Admin\QuestionsController@index')
+                    ->with('status', trans('messages.success.delete'));
+            } 
+        } catch (Exception $e) {
+            Log::debug($e);
+        }
+
+        return redirect()->action('Admin\QuestionsController@index')
+            ->withErrors(trans('messages.errors.delete'));
     }
 }

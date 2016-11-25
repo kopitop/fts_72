@@ -31,12 +31,22 @@
                     <td>{{ $question->subject->name }}</td>
                     <td>{{ str_limit($question->user->name) }}</td>
                     <td>
-                        <div class="btn-group btn-group-sm">
-                            <a href="{{ action('Admin\QuestionsController@edit', ['id' => $question->id]) }}" class="btn btn-default">
-                                {{ trans('common/buttons.edit') }}
-                            </a>
-                            <a href="#" class="btn btn-danger">{{ trans('common/buttons.delete') }}</a>
-                          </div>
+                        {!! Form::open([
+                            'action' => ['Admin\QuestionsController@destroy', $question->id],
+                            'method' =>  'DELETE'
+                        ]) !!}
+                            <div class="btn-group btn-group-sm">
+                                {!! link_to_action('Admin\QuestionsController@edit', trans('common/buttons.edit'), [ 
+                                    'id' => $question->id 
+                                ], [
+                                    'class' => 'btn btn-default'
+                                ]) !!}
+
+                                {!! Form::submit(trans('common/buttons.delete'), [
+                                    'class' => 'btn btn-danger'
+                                ])!!}  
+                            </div>
+                        {!! Form::close() !!}
                     </td>
                 </tr>
                 @endforeach
