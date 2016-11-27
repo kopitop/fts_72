@@ -41,7 +41,7 @@ class ExamsController extends BaseController
         $this->viewData['subjectList'] = $this->subjectRepository->lists('name', 'id');
         $this->viewData['examsOfUser'] = $this->examRepository->getExamsOfUser();
 
-        return view('web.exams.index', $this->viewData);
+        return view('web.exam.index', $this->viewData);
     }
 
     /**
@@ -93,18 +93,9 @@ class ExamsController extends BaseController
      */
     public function show($id)
     {
-        //
-    }
+        $this->viewData['data'] = $this->examRepository->showExam($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function do($id)
-    {
-        //
+        return view('web/exam.detail', $this->viewData);
     }
 
     /**
@@ -116,7 +107,30 @@ class ExamsController extends BaseController
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $data = $request->only('exam', 'time_spent');
+
+            $isFinished = false;
+
+            if ($request->input('commit') == config('exam.commit.finish')) {
+                $isFinished = true;
+            }
+
+            if ($this->examRepository->saveExam($data, $id, $isFinished)) {
+                DB::commit();
+
+                return redirect()->action('Web\ExamsController@index')
+                    ->with('status', trans('messages.success.save-exam'));
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            Log::debug($e);
+        }
+
+        return redirect()->action('Web\ExamsController@index')
+            ->withErrors(trans('messages.failed.save-exam'));
+        
     }
 
     /**

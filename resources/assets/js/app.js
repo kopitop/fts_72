@@ -56,4 +56,6 @@ $(document).ready(function () {
     $('.confirm').on('click', function () {
         return confirm(confirmation);
     })
+
+    //Countdown
 })

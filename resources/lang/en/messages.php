@@ -10,5 +10,5 @@ return [
         'create' => 'Created successfully!',
         'update' => 'Updated successfully!',
     ],
-
+    'load-page' => 'Beware!!! You can lost your progress! Are you sure to leave?',
 ];

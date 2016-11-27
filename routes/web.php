@@ -33,5 +33,4 @@ Route::group(['namespace' => 'Web', 'middleware' => 'auth'], function () {
     Route::resource('exams', 'ExamsController', ['except' => [
         'create', 'edit'
     ]]);
-    Route::get('exams/do/{id}', 'ExamsController@do');
 });

@@ -24,6 +24,14 @@ class Result extends Model
     protected $guarded = [];
 
     /**
+     * Get the exam answers for the result.
+     */
+    public function examAnswers()
+    {
+        return $this->hasMany(ExamAnswer::class);
+    }
+
+    /**
      * Get the exam that owns the result.
      */
     public function exam()
