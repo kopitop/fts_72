@@ -55,7 +55,7 @@
                                         <td>{{ gmdate("H:i:s", $exam->time_spent) }}</td>
                                         <td>{{ $exam->score }}</td>
                                         <td>
-                                            {!! link_to_action('Web\ExamsController@do', trans('common/buttons.do'), [ 
+                                            {!! link_to_action('Web\ExamsController@show', trans('common/buttons.do'), [ 
                                                 'id' => $exam->id 
                                             ], [
                                                 'class' => 'btn btn-default'

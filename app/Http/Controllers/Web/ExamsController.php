@@ -41,7 +41,7 @@ class ExamsController extends BaseController
         $this->viewData['subjectList'] = $this->subjectRepository->lists('name', 'id');
         $this->viewData['examsOfUser'] = $this->examRepository->getExamsOfUser();
 
-        return view('web.exams.index', $this->viewData);
+        return view('web.exam.index', $this->viewData);
     }
 
     /**
@@ -93,18 +93,10 @@ class ExamsController extends BaseController
      */
     public function show($id)
     {
-        //
-    }
+        $this->viewData['data'] = $this->examRepository->showExam($id);
+        //can update lai status exam
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function do($id)
-    {
-        //
+        return view('web/exam.detail', $this->viewData);
     }
 
     /**
@@ -116,7 +108,13 @@ class ExamsController extends BaseController
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->only('exam');
+
+        if ($request->input('commit') == config('exam.commit.save')) {
+            $this->examRepository->saveExam($data, $id);
+        } elseif ($request->input('commit') == config('exam.commit.finish')) {
+            $this->examRepository->finishExam($data);
+        }
     }
 
     /**

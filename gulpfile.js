@@ -19,5 +19,9 @@ elixir(mix => {
             'resources/assets/sass/error.css',
             'public/css/'
         )
+        .scripts(
+            './bower_components/jquery.countdown/dist/jquery.countdown.min.js',
+            'public/js/vendor.js'
+        )
        .webpack('app.js');
 });

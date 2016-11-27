@@ -80,4 +80,66 @@ class ExamRepository extends BaseRepository implements ExamRepositoryInterface
         return $this->model
             ->where('user_id', '=', $this->auth->user()->id)->get();
     }
+
+    /**
+     * Get data of a exam
+     *
+     * @param int $id
+     *
+     * @return mixed
+     */
+    public function showExam($id)
+    {
+        $data['exam'] = $this->model->findOrFail($id);
+
+        $data['results'] = $data['exam']->results;
+
+        foreach ($data['results'] as $key => $result) {
+            $data['questions'][$key]['result'] = $result;
+            $data['questions'][$key]['content'] = $result->question;
+
+            foreach ($data['questions'][$key]['content']->systemAnswers as $answer) {
+                $data['questions'][$key]['answers'][] = $answer;
+            }
+        }
+
+        return $data;
+    }
+
+    /**
+     * Save data of a exam
+     *
+     * @param int $id, array $data
+     *
+     * @return mixed
+     */
+    public function saveExam($input, $id)
+    {
+        DB::beginTransaction();
+        $exam = $this->model->findOrFail($id);
+
+        $data['exam'] = $input['exam']['time_spent'];
+        $exam->fill($input['exam']);
+        $exam->save();
+
+        foreach ($input['exam'] as $exam) {
+            $result = Result::findOrFail($exam['result']);
+
+            $result->examAnswers()->delete();
+
+            foreach ($exam['answer'] as $answer) {
+                $data['answer'] = [
+                    'content'
+                ]
+            }
+
+            $result->examAnswers()->create([
+                    'content' => $exam['answer']['text'];
+                    'content' => $exam['answer']['text'];
+                ]);
+        }
+
+        DB::rollback();
+
+    }
 }

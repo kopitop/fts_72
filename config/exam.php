@@ -9,5 +9,14 @@ return [
     ],
     'time' => [
         'begin' => 0
+    ],
+    'question-type' => [
+        1 => 'singlechoice',
+        2 => 'multiplechoice',
+        3 => 'text',
+    ],
+    'commit' => [
+        'save' => 'Save',
+        'finish' => 'Finish',
     ]
 ];
