@@ -9,6 +9,8 @@ use App\Repositories\Eloquent\UserRepository;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use App\Repositories\Eloquent\QuestionRepository;
 use App\Repositories\Contracts\QuestionRepositoryInterface;
+use App\Repositories\Eloquent\ExamRepository;
+use App\Repositories\Contracts\ExamRepositoryInterface;
 use App;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -33,5 +35,6 @@ class RepositoryServiceProvider extends ServiceProvider
         App::bind(SubjectRepositoryInterface::class, SubjectRepository::class);
         App::bind(UserRepositoryInterface::class, UserRepository::class);
         App::bind(QuestionRepositoryInterface::class, QuestionRepository::class);
+        App::bind(ExamRepositoryInterface::class, ExamRepository::class);
     }
 }

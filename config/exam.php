@@ -7,4 +7,7 @@ return [
         'unchecked' => 3,
         'checked' => 4,
     ],
+    'time' => [
+        'begin' => 0
+    ]
 ];
