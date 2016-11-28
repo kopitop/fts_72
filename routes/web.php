@@ -22,6 +22,7 @@ Route::group(['middleware' => 'admin', 'prefix' => 'admin', 'namespace' => 'Admi
     Route::resource('subjects', 'SubjectsController');
     Route::resource('questions', 'QuestionsController');
     Route::resource('users', 'UsersController');
+    Route::resource('exams', 'ExamsController');
 });
 
 //User features

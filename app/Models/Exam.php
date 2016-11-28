@@ -46,4 +46,13 @@ class Exam extends Model
     {
         return $this->belongsTo(Subject::class);
     }
+
+    /**
+     * Check if a user own exam
+     * @return boolean
+     */
+    public function isOwnExam()
+    {
+        return auth()->check() && auth()->id() == $this->user_id;
+    }
 }

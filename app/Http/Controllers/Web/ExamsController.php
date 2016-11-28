@@ -15,9 +15,12 @@ class ExamsController extends BaseController
      * @var questionRepository
      *
      * @var subjectRepository
+     *
+     * @var examRepository
      */
     private $questionRepository;
     private $subjectRepository;
+    private $examRepository;
  
     public function __construct(
         QuestionRepository $questionRepository,
@@ -93,6 +96,18 @@ class ExamsController extends BaseController
      */
     public function show($id)
     {
+        $exam = $this->examRepository->find($id);
+
+        if (Gate::allows('access-admin')) {
+            return redirect()->action('Web\ExamsController@show', ['id' => $id])
+                ->with('status', trans('exam.admin-check'));
+        }
+
+        if (!$exam->isOwnExam()) {
+            return redirect()->action('Web\ExamsController@index')
+                ->withErrors(trans('common/errors.forbidden'));
+        }
+
         $this->viewData['data'] = $this->examRepository->showExam($id);
 
         return view('web/exam.detail', $this->viewData);

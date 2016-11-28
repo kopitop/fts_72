@@ -37,8 +37,18 @@
                     <i class="fa-li fa fa-caret-right"></i>{{ trans('common/buttons.create') }}
                 </a>
             </li>
-            <li class="{!! set_active(['users/users']) !!}">
+            <li class="{!! set_active(['admin/users']) !!}">
                 <a href="{!! action('Admin\UsersController@index') !!}">
+                    <i class="fa-li fa fa-caret-right"></i>{{ trans('common/buttons.list') }}
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li role="presentation">
+        <a href="#"><strong>{{ trans('admin/exam.exams') }}</strong></a>
+        <ul class="nav nav-pills nav-stacked fa-ul">
+            <li class="{!! set_active(['admin/exams']) !!}">
+                <a href="{!! action('Admin\ExamsController@index') !!}">
                     <i class="fa-li fa fa-caret-right"></i>{{ trans('common/buttons.list') }}
                 </a>
             </li>
