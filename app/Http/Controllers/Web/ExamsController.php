@@ -8,6 +8,7 @@ use App\Repositories\Contracts\SubjectRepositoryInterface as SubjectRepository;
 use App\Repositories\Contracts\ExamRepositoryInterface as ExamRepository;
 use Log;
 use DB;
+use Gate;
 
 class ExamsController extends BaseController
 {
@@ -98,19 +99,19 @@ class ExamsController extends BaseController
     {
         $exam = $this->examRepository->find($id);
 
+        if ($exam->isOwnExam()) {
+            $this->viewData['data'] = $this->examRepository->showExam($id);
+
+            return view('web/exam.detail', $this->viewData);
+        }
+
         if (Gate::allows('access-admin')) {
-            return redirect()->action('Web\ExamsController@show', ['id' => $id])
+            return redirect()->action('Admin\ExamsController@show', ['id' => $id])
                 ->with('status', trans('exam.admin-check'));
         }
 
-        if (!$exam->isOwnExam()) {
-            return redirect()->action('Web\ExamsController@index')
-                ->withErrors(trans('common/errors.forbidden'));
-        }
-
-        $this->viewData['data'] = $this->examRepository->showExam($id);
-
-        return view('web/exam.detail', $this->viewData);
+        return redirect()->action('Web\ExamsController@index')
+            ->withErrors(trans('common/errors.forbidden'));
     }
 
     /**

@@ -8,6 +8,7 @@ use Illuminate\Container\Container as App;
 use Illuminate\Contracts\Auth\Factory as Auth;
 use App\Models\Subject;
 use App\Models\Result;
+use App\Models\Question;
 use DB;
 
 class ExamRepository extends BaseRepository implements ExamRepositoryInterface
@@ -100,11 +101,11 @@ class ExamRepository extends BaseRepository implements ExamRepositoryInterface
         }
 
         //Get all results associate with exam
-        $data['results'] = Result::with('question')
+        $results = Result::with('question')
             ->where('exam_id', '=', $data['exam']->id)->get();
 
         //Get all questions associate with result
-        foreach ($data['results'] as $key => $result) {
+        foreach ($results as $key => $result) {
             $data['questions'][$key]['result'] = $result;
             $data['questions'][$key]['content'] = $result->question;
 
@@ -170,6 +171,63 @@ class ExamRepository extends BaseRepository implements ExamRepositoryInterface
                     ]);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * Check result of a exam
+     *
+     * @param int $id, array $data
+     *
+     * @return mixed
+     */
+    public function checkExam($input, $id)
+    {
+        $exam = $this->model->findOrFail($id);
+
+        //Map results input
+        $inputResult = [];
+        foreach ($input['exam'] as $key => $item) {
+            if (isset($item['result']['correct'])) {
+                $inputResult[$item['result']['id']] = $item['result']['correct'];
+            }
+        }
+
+        //Update results for choices questions
+        foreach ($exam->results as $result) {
+            $question = $result->question;
+            if ($question->type == 1) {
+                $result->fill(['is_correct' => $result->examAnswers()->first() ? $result->examAnswers()->first()->systemAnswer()->first()->is_correct : 0])
+                    ->save();
+
+            } elseif ($question->type == 2) {
+                //Compare exam answers with true answers
+                $trueAnswers = $question->systemAnswers()->where('is_correct', 1)->get(['id'])->toArray();
+                $examAnswers = $result->examAnswers()->get(['system_answer_id'])->toArray();
+                $trueAnswersArray = [];
+                foreach ($trueAnswers as $answer) {
+                    $trueAnswersArray[] = $answer['id'];
+                }
+                $examAnswersArray = [];
+                foreach ($examAnswers as $answer) {
+                    $examAnswersArray[] = $answer['system_answer_id'];
+                }
+                if (array_diff($trueAnswersArray, $examAnswersArray)) {
+                    $result->fill(['is_correct' => config('answer.correct.false')])->save();
+                }else {
+                    $result->fill(['is_correct' => config('answer.correct.true')])->save();
+                }
+            } else {
+                $result->fill(['is_correct' => $inputResult[$result->id]])->save();
+            }
+        }
+
+        //Update status
+        $exam->fill([
+                'status' => config('exam.status.checked'),
+                'score' => $exam->results()->where('is_correct', 1)->count(),
+            ])->save();
 
         return $this;
     }

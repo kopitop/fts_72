@@ -110,4 +110,26 @@ class ExamsController extends BaseController
     {
         //
     }
+
+    /**
+     * Check results of the exam
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function check(Request $request, $id)
+    {   
+        $isChecked = $this->examRepository->find($id)
+            ->status == config('exam.status.checked');
+
+        if ($isChecked) {
+            return back()->withErrors(trans('messages.failed.checked'));
+        }
+
+        $input = $request->only('exam');
+
+        $this->examRepository->checkExam($input, $id);
+
+        return back()->with('status', trans('messages.success.check'));
+    }
 }

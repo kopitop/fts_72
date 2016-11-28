@@ -22,7 +22,11 @@ Route::group(['middleware' => 'admin', 'prefix' => 'admin', 'namespace' => 'Admi
     Route::resource('subjects', 'SubjectsController');
     Route::resource('questions', 'QuestionsController');
     Route::resource('users', 'UsersController');
-    Route::resource('exams', 'ExamsController');
+
+    Route::post('exams/{id}/check', 'ExamsController@check');
+    Route::resource('exams', 'ExamsController', ['only' => [
+            'index', 'show'
+        ]]);
 });
 
 //User features
