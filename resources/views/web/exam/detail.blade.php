@@ -66,7 +66,8 @@
 
                     {!! Form::close() !!}
 
-                    <div id="clock"></div>
+                    <div style="display: none" id="clock"></div>
+                    @include('web.includes.clock')
 
                 </div>
             </div>
@@ -80,5 +81,18 @@
     var alert = "{{ trans('messages.load-page') }}";
     var isTesting = "{{ $data['exam']->status == config('exam.status.testing') }}";
     var isChecked = "{{ $data['exam']->status == config('exam.status.checked') }}";
+
+    //make color
+    var makeColor = function () {
+        this.h = Math.floor(remainingTime / 3600);
+        this.i = Math.floor((remainingTime % 3600) / 60);
+        this.s = remainingTime % 60;
+
+        document.getElementsByClassName("hours")[0].setAttribute("data-init-value", this.h);
+        document.getElementsByClassName("min")[0].setAttribute("data-init-value", this.i);
+        document.getElementsByClassName("sec")[0].setAttribute("data-init-value", this.s);
+    };
+
+    makeColor();
 </script>
 @endsection

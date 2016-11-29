@@ -12,6 +12,8 @@
 
     <!-- Styles -->
     {!! Html::style(elixir('css/app.css')) !!}
+    {!! Html::style('css/style.css') !!}
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
 
     <!-- Scripts -->
     <script>
@@ -96,6 +98,8 @@
 
     <!-- Scripts -->
     {!! HTML::script(elixir('js/app.js')); !!}
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js'></script>
+    <script src="/js/vendor.js"></script>
     <script>
         var confirmation = "{{ trans('common/dialogs.confirmation') }}";
     </script>

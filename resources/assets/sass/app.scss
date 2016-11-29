@@ -17,3 +17,10 @@
 .answer-container label {
     display: block;
 }
+input[name="commit"] {
+    position: fixed;
+    bottom: 20px;
+}
+input[value="Finish"] {
+    right: 100px;
+}

@@ -19,5 +19,12 @@ elixir(mix => {
             'resources/assets/sass/error.css',
             'public/css/'
         )
-       .webpack('app.js');
+        .styles(
+            'style.css',
+            'public/css/style.css')
+        .scripts(
+            'resources/assets/js/index.js',
+            'public/js/vendor.js'
+        )
+        .webpack('app.js');
 });
