@@ -129,7 +129,7 @@ class ExamsController extends BaseController
                 ->status == config('exam.status.checked');
 
             if ($isChecked) {
-                return back()->withErrors(trans('messages.failed.checked'));
+                return back()->withErrors(trans('messages.errors.checked'));
             }
 
             $input = $request->only('exam');
@@ -146,7 +146,7 @@ class ExamsController extends BaseController
             Log::debug($e);
             DB::rollback();
 
-            return back()->withErrors(trans('messages.failed.check'));
+            return back()->withErrors(trans('messages.errors.check'));
         }
         
     }

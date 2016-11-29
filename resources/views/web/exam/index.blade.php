@@ -65,6 +65,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        {!! $examsOfUser->links() !!}
                     @else
                         <div class="alert alert-warning" role="alert">
                             {{ trans('common/messages.empty-list') }}

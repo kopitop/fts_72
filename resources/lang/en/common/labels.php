@@ -18,4 +18,5 @@ return [
     'subject' => 'Subject',
     'answer' => 'Answer',
     'status' => 'Status',
+    'correct' => 'Correct',
 ];
