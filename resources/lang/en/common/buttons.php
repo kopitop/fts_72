@@ -23,7 +23,9 @@ return [
     'save' => 'Save',
     'finish' => 'Finish',
     'exam' => 'Exam',
-    'do' => 'Do',
+    'do' => 'Test',
     'check' => 'Check',
     'chart' => 'Chart',
+    'view' => 'View',
+    'inprogress' => 'In Progress',
 ];

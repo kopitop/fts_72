@@ -18,6 +18,8 @@
                 </tr>
                 <tbody>
                     @foreach ($exams as $exam)
+                        @php $isChecked = $exam->status == config('exam.status.checked') @endphp
+                        @php $isUnchecked = $exam->status == config('exam.status.unchecked') @endphp
                         <tr>
                             <td>{{ $exam->subject->name }}</td>
                             <td>{{ trans('front-end/exam.states.' . $exam->status) }}</td>
@@ -26,10 +28,10 @@
                             <td>{{ gmdate("H:i:s", $exam->time_spent) }}</td>
                             <td>{{ $exam->score }}</td>
                             <td>
-                                {!! link_to_action('Admin\ExamsController@show', trans('common/buttons.check'), [ 
+                                {!! link_to_action('Admin\ExamsController@show', $isChecked ? trans('common/buttons.view') : ($isUnchecked ? trans('common/buttons.check') : trans('common/buttons.inprogress')), [ 
                                     'id' => $exam->id 
                                 ], [
-                                    'class' => 'btn btn-info btn-xs'
+                                    'class' => $isChecked ? 'btn btn-info btn-xs' : ($isUnchecked ? 'btn btn-warning btn-xs' : 'btn btn-success btn-xs')
                                 ]) !!}
                             </td>
                         </tr>

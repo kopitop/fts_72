@@ -80,7 +80,7 @@ class ExamRepository extends BaseRepository implements ExamRepositoryInterface
     public function getExamsOfUser()
     {
         return $this->model
-            ->where('user_id', '=', $this->auth->user()->id)->paginate();
+            ->where('user_id', '=', $this->auth->user()->id)->with('subject')->paginate();
     }
 
     /**

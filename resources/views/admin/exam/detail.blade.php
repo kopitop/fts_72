@@ -8,7 +8,7 @@
                 <div class="panel-heading">
                     <h3>{{ trans('admin/exams.subject') . ': ' . $data['exam']->subject->name }}</h3>
                     <p>{{ trans('admin/exams.time') . ': ' . $data['exam']->created_at }}</p>
-                    <p>{{ trans('admin/exams.score') }}: {{ $data['exam']->score ? $data['exam']->score : '' }}</p>
+                    <p>{{ trans('admin/exams.score') }}: {{ $data['exam']->score ? $data['exam']->score : '' }} | {{ $data['exam']->subject->number_of_question }}</p>
                 </div>
                 @include('layouts.includes.messages')
 

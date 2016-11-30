@@ -46,6 +46,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($examsOfUser as $exam)
+                                     @php $isTesting = $exam->status == config('exam.status.testing') @endphp
                                     <tr>
                                         <td>{{ $exam->created_at }}</td>
                                         <td>{{ $exam->subject->name }}</td>
@@ -55,10 +56,10 @@
                                         <td>{{ gmdate("H:i:s", $exam->time_spent) }}</td>
                                         <td>{{ $exam->score }}</td>
                                         <td>
-                                            {!! link_to_action('Web\ExamsController@show', trans('common/buttons.do'), [ 
+                                            {!! link_to_action('Web\ExamsController@show', $isTesting ? trans('common/buttons.do') : trans('common/buttons.view'), [ 
                                                 'id' => $exam->id 
                                             ], [
-                                                'class' => 'btn btn-default'
+                                                'class' => $isTesting ? 'btn btn-primary' : 'btn btn-default'
                                             ]) !!}
                                         </td>
                                     </tr>

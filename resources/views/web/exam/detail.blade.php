@@ -9,7 +9,7 @@
                     <h3>{{ trans('front-end/exam.subject') . ': ' . $data['exam']->subject->name }}</h3>
                     <p>{{ trans('front-end/exam.created-date') . ': ' . $data['exam']->created_at }}</p>
                     @if (isset($data['exam']->score))
-                        <p>{{ trans('front-end/exam.score') . ': ' . $data['exam']->score }} </p>
+                        <p>{{ trans('front-end/exam.score') . ': ' . $data['exam']->score }} | {{ $data['exam']->subject->number_of_question }} </p>
                     @endif
                 </div>
                 @include('layouts.includes.messages')
