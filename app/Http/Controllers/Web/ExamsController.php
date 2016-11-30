@@ -103,7 +103,7 @@ class ExamsController extends BaseController
 
         if (Gate::allows('access-admin')) {
             return redirect()->action('Admin\ExamsController@show', ['id' => $id])
-                ->with('status', trans('exam.admin-check'));
+                ->with('status', trans('admin/exams.admin-check'));
         }
 
         return redirect()->action('Web\ExamsController@index')

@@ -36,6 +36,7 @@ class SendExamCheckedNotification
         $chatwork->createRoomMessage(config('services.chatwork.group_id'), trans('messages.exam-checked', [
             'user' => $user->name,
             'score' => $event->exam->score,
+            'quantity' => $event->exam->subject->number_of_question,
         ]));
 
         //Send notif through email

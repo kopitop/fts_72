@@ -7,4 +7,5 @@ return [
     'subject' => 'Subject',
     'time' => 'Time',
     'score' => 'Score',
+    'admin-check' => 'You can check the exam now',
 ];

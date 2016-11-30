@@ -53,7 +53,7 @@ class ChartsController extends BaseController
         $totalQuestionSubject = $chart->DataTable();
 
 
-        $allQuestion = DB::select('SELECT subjects.name, A.subject_id, sum(A.status_active) as active, sum(A.status_inactive) as inactive FROM ( SELECT B.subject_id, IF(B.status=1,1,0) AS `status_active`, IF(B.status=0,1,0) AS `status_inactive` FROM `questions` AS B WHERE B.deleted_at is null) AS A INNER JOIN subjects ON A.subject_id = subjects.id group by A.subject_id');
+        $allQuestion = DB::select('SELECT subjects.name, A.subject_id, sum(A.status_active) as active, sum(A.status_inactive) as inactive FROM ( SELECT B.subject_id, IF(B.status=1,1,0) AS `status_active`, IF(B.status=0,1,0) AS `status_inactive` FROM `questions` AS B WHERE B.deleted_at is null) AS A INNER JOIN subjects ON A.subject_id = subjects.id group by subjects.name, A.subject_id');
 
         $totalQuestionSubject->addStringColumn('Subject')
                  ->addNumberColumn('Active')

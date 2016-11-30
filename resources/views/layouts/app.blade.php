@@ -53,10 +53,12 @@
                             <li><a href="{{ url('/login') }}">{{ trans('common/buttons.login') }}</a></li>
                             <li><a href="{{ url('/register') }}">{{ trans('common/buttons.register') }}</a></li>
                         @else
-                            <li>
-                                {{ link_to_action('Web\SuggestQuestionsController@index', 
-                                    trans('front-end/users.suggest-question.contribute-question') , null, null) }}
-                            </li>
+                            @if (Gate::denies('access-admin'))
+                                <li>
+                                    {{ link_to_action('Web\SuggestQuestionsController@index', 
+                                        trans('front-end/users.suggest-question.contribute-question') , null, null) }}
+                                </li>
+                            @endif
                             <li>
                                 {{ link_to_action('Web\ExamsController@index', trans('common/buttons.exam')) }}
                             </li>
