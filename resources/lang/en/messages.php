@@ -29,4 +29,5 @@ return [
     ],
     'create-exam' => 'Your exam has been initialized',
     'load-page' => 'Beware!!! You can lost your progress! Are you sure to leave?',
+    'exam-checked' => 'The exam of :user has been checked done. Score: :score',
 ];

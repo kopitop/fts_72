@@ -237,6 +237,6 @@ class ExamRepository extends BaseRepository implements ExamRepositoryInterface
             'score' => $exam->results()->where('is_correct', config('answer.correct.true'))->count(),
         ])->save();
 
-        return $this;
+        return $exam;
     }
 }

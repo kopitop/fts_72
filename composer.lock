@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c3abb71d83c87dc11270f5aa4c03a597",
-    "content-hash": "f66403165d104d9809b7f530c61581c4",
+    "hash": "46781a53349814244b48b264fcc99b5c",
+    "content-hash": "34c189bd47d9bc20614f70e2ea23f625",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -2126,6 +2126,39 @@
                 "environment"
             ],
             "time": "2016-09-01 10:05:43"
+        },
+        {
+            "name": "wataridori/chatwork-sdk",
+            "version": "0.1.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wataridori/chatwork-sdk.git",
+                "reference": "966fa42d7d789ce4ba9e6b551c976cc7b9532ea3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wataridori/chatwork-sdk/zipball/966fa42d7d789ce4ba9e6b551c976cc7b9532ea3",
+                "reference": "966fa42d7d789ce4ba9e6b551c976cc7b9532ea3",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "wataridori\\ChatworkSDK\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Tran Duc Thang",
+                    "email": "thangtd90@gmail.com"
+                }
+            ],
+            "description": "Just a non-official SDK for Chatwork",
+            "time": "2016-06-14 07:11:51"
         }
     ],
     "packages-dev": [

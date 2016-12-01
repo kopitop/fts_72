@@ -34,5 +34,9 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
+    'chatwork' => [
+        'client_id' => env('CHATWORK_APP_ID'),
+        'group_id' => env('CHATWORK_GROUP_ID'),
+    ], 
 
 ];

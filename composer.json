@@ -9,7 +9,8 @@
         "laravel/framework": "5.3.*",
         "laravelcollective/html": "^5.3.0",
         "barryvdh/laravel-debugbar": "^2.3",
-        "khill/lavacharts" : "3.0.*"
+        "khill/lavacharts" : "3.0.*",
+        "wataridori/chatwork-sdk": "^0.1.7"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Repositories\Contracts\ExamRepositoryInterface as ExamRepository;
+use App\Events\ExamChecked;
+use App\Jobs\SendExamReport;
+use DB;
+use Log;
 
 class ExamsController extends BaseController
 {
@@ -120,17 +124,33 @@ class ExamsController extends BaseController
      */
     public function check(Request $request, $id)
     {   
-        $isChecked = $this->examRepository->find($id)
-            ->status == config('exam.status.checked');
+        DB::beginTransaction();
+        try {
+            $isChecked = $this->examRepository->find($id)
+                ->status == config('exam.status.checked');
 
-        if ($isChecked) {
-            return back()->withErrors(trans('messages.failed.checked'));
+            if ($isChecked) {
+                return back()->withErrors(trans('messages.failed.checked'));
+            }
+
+            $input = $request->only('exam');
+
+            $checkedExam = $this->examRepository->checkExam($input, $id);
+
+            if (!$checkedExam) {
+                throw new Exception();
+            }
+
+            dispatch(new SendExamReport($checkedExam));
+            DB::commit();
+
+            return back()->with('status', trans('messages.success.check'));
+        } catch (\Exception $e) {
+            Log::debug($e);
+            DB::rollback();
+
+            return back()->withErrors(trans('messages.failed.check'));
         }
-
-        $input = $request->only('exam');
-
-        $this->examRepository->checkExam($input, $id);
-
-        return back()->with('status', trans('messages.success.check'));
+        
     }
 }
